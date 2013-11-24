@@ -4,7 +4,7 @@
 package mobConv;
 
 /**
- * @author click
+ * @author szpiega
  *
  */
 
