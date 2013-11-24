@@ -8,7 +8,13 @@ package mobConv;
  *
  */
 
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -44,6 +50,15 @@ public class Main {
 			//aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 			//erwerwqer
 			
+			File file = new File("strona.html");
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw.write(l.get(1).toString());
+			bw.close();
+
+			if (Desktop.isDesktopSupported()) {
+				Desktop.getDesktop().open(file);
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
