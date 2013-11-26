@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class SiteMobilizer {
@@ -19,9 +20,26 @@ public class SiteMobilizer {
 	
 	SiteMobilizer (URL url) {
 		this.url = url;
-		// pobierz strone
-		
-		// wczytaj do stringBuildera
+		try {
+			// pobierz strone
+			doc = Jsoup.connect(url.toString()).get();
+			
+			// prztwarzaj stronê
+			htmlRemoveWidthAndHight();
+			htmlAddRectToHref();
+			cssFromExternalFile ();
+			cssFromHtmlStyleTag ();
+			cssFromHtmlTags ();
+			cssClean ();
+			cssAddAllToHTML ();
+			
+			//wyœwietl strone dla testu
+			ViewSite (doc.outerHtml(),"site.html");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void ViewSite (String site, String path)
@@ -33,8 +51,6 @@ public class SiteMobilizer {
 			bw.write(site);
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
 			System.out.println("ERROR: " + e.getMessage() + " :");
 			e.printStackTrace();
 		}
