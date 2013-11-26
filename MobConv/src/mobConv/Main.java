@@ -13,9 +13,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
+
+import javax.print.attribute.standard.Copies;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,7 +33,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Document doc = null;
+		/*Document doc = null;
 		try {
 			doc = Jsoup.connect("http://hacking.pl/").get();
 			Elements el = doc.select("link[rel=stylesheet]");
@@ -58,11 +62,21 @@ public class Main {
 			if (Desktop.isDesktopSupported()) {
 				Desktop.getDesktop().open(file);
 			}
+			
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Elements newsHeadlines = doc.select("#mp-itn b a");
+		try {
+			URL url = new URL("http://hacking.pl/");
+			CopyOfSiteMobilizer c = new CopyOfSiteMobilizer(url);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 
 }
