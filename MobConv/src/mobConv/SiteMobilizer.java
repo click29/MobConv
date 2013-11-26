@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class SiteMobilizer {
 
@@ -17,33 +18,32 @@ public class SiteMobilizer {
 	StringBuilder css;
 	StringBuilder js;
 	int generatedClassCount = 0;
-	
-	SiteMobilizer (URL url) {
+
+	SiteMobilizer(URL url) {
 		this.url = url;
 		try {
 			// pobierz strone
 			doc = Jsoup.connect(url.toString()).get();
-			
+
 			// prztwarzaj stronê
 			htmlRemoveWidthAndHight();
 			htmlAddRectToHref();
-			cssFromExternalFile ();
-			cssFromHtmlStyleTag ();
-			cssFromHtmlTags ();
-			cssClean ();
-			cssAddAllToHTML ();
-			
-			//wyœwietl strone dla testu
-			ViewSite (doc.outerHtml(),"site.html");
-			
+			cssFromExternalFile();
+			cssFromHtmlStyleTag();
+			cssFromHtmlTags();
+			cssClean();
+			cssAddAllToHTML();
+
+			// wyœwietl strone dla testu
+			ViewSite(doc.outerHtml(), "site.html");
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void ViewSite (String site, String path)
-	{
+
+	public void ViewSite(String site, String path) {
 		File file = new File(path);
 		BufferedWriter bw;
 		try {
@@ -54,7 +54,7 @@ public class SiteMobilizer {
 			System.out.println("ERROR: " + e.getMessage() + " :");
 			e.printStackTrace();
 		}
-		
+
 		if (Desktop.isDesktopSupported()) {
 			try {
 				Desktop.getDesktop().open(file);
@@ -64,64 +64,56 @@ public class SiteMobilizer {
 			}
 		}
 	}
-	
-	/**
-	 *  Metoda wy³uskuj¹ca style osadzone w html <style></styl>
-	 */
-	private void cssFromHtmlStyleTag ()
-	{
-		
-	}
-	
 
 	/**
-	 *  Metoda wy³uskuj¹ca style osadzone w html <a style:"..."> </a>
+	 * Metoda wy³uskuj¹ca style osadzone w html <style></styl>
 	 */
-	private void cssFromHtmlTags ()
-	{
-		
+	private void cssFromHtmlStyleTag() {
+
 	}
-	
+
+	/**
+	 * Metoda wy³uskuj¹ca style osadzone w html <a style:"..."> </a>
+	 */
+	private void cssFromHtmlTags() {
+
+	}
+
 	/**
 	 * Metoda wy³uskuj¹ca style z plików zewnêtrznych
 	 */
-	private void cssFromExternalFile ()
-	{
-		
+	private void cssFromExternalFile() {
+
 	}
-	
+
 	/**
 	 * Metoda usuwa zbêdne w³aœciwoœci z bufora z css-em
 	 */
-	private void cssClean ()
-	{
-		
+	private void cssClean() {
+
 	}
-	
-	
+
 	/**
-	 * Metoda dodaje do strony gotowy bufor z css-em 
+	 * Metoda dodaje do strony gotowy bufor z css-em
 	 */
-	private void cssAddAllToHTML ()
-	{
-		
+	private void cssAddAllToHTML() {
+
 	}
-	
-	
+
 	/**
-	 * Metoda usuwa argumenty width i Hight ze znaczników html 
+	 * Metoda usuwa argumenty width i Hight ze znaczników html
 	 */
-	private void   htmlRemoveWidthAndHight ()
-	{
-		
+	private void htmlRemoveWidthAndHight() {
+		doc.getElementsByAttribute("width").removeAttr("width");
+		doc.getElementsByAttribute("height").removeAttr("height");
 	}
-	
+
 	/**
-	 * Metoda dodaje argument shape="rect" do linków 
+	 * Metoda dodaje argument shape="rect" do linków
 	 */
-	private void   htmlAddRectToHref()
-	{
-		
+	private void htmlAddRectToHref() {
+		doc.getElementsByTag("a").attr("shape", "rect");
+
 	}
-	
+
 }
